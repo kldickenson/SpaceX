@@ -1,4 +1,5 @@
-import React, { lazy, Suspense } from 'react';
+import React, { useContext, lazy, Suspense } from 'react'
+import { AppContext } from './context/AppContext'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useMediaPredicate } from 'react-media-hook';
 
@@ -13,10 +14,11 @@ import Foot from './partial-components/Foot';
 
 const Frame = () => {
   const isMedium = useMediaPredicate('(min-width: 600px)');
+  const context = useContext(AppContext);
   const breakpoint = isMedium ? 'medium' : 'small';
    return (
       <BrowserRouter>
-         <div className={`app-container ${breakpoint}`}>
+         <div className={`app-container ${breakpoint} ${context.themeMode}`}>
             <main>
                <header>
                   <Logo />
